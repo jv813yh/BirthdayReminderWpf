@@ -19,3 +19,5 @@ C:\Users\ke01140\source\repos\BirthdayReminderWpf\obj\Debug\net6.0-windows\refin
 C:\Users\ke01140\source\repos\BirthdayReminderWpf\obj\Debug\net6.0-windows\BirthdayReminderWpf.pdb
 C:\Users\ke01140\source\repos\BirthdayReminderWpf\obj\Debug\net6.0-windows\BirthdayReminderWpf.genruntimeconfig.cache
 C:\Users\ke01140\source\repos\BirthdayReminderWpf\obj\Debug\net6.0-windows\ref\BirthdayReminderWpf.dll
+C:\Users\ke01140\source\repos\BirthdayReminderWpf\obj\Debug\net6.0-windows\View\PersonWindow.g.cs
+C:\Users\ke01140\source\repos\BirthdayReminderWpf\obj\Debug\net6.0-windows\View\PersonWindow.baml

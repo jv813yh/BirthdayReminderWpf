@@ -30,7 +30,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.4*"/>
@@ -106,22 +106,26 @@
         </StackPanel>
         
         <Calendar x:Name="Calendar"
+                  VerticalAlignment="Top"
+                  Margin="0,50,0,0"
                   Grid.Column="1"
                   Grid.Row="3"
                   Width="220" 
                   Height="190"/>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Grid.ColumnSpan="2"
-                    HorizontalAlignment="Center">
+                    Grid.RowSpan="2"
+                    HorizontalAlignment="Right">
             <Button Width="100" 
                     Height="40"
-                    Margin="0,0,80,0"
+                    Margin="0,220,60,0"
                     x:Name="AddButton"
-                    Content="Add a person"/>
+                    Content="Add a person" Click="AddPersonClickBtn"/>
             <Button Width="100" 
                     Height="40"
+                    Margin="0,220,50,0"
                     x:Name="DeleteButton"
                     Content="Remove a person"/>
 
