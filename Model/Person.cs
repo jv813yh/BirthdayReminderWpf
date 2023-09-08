@@ -17,12 +17,57 @@ namespace BirthdayReminderWpf.Model
     public class Person
     {
         public string Name { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        int age = -1;
+
+        public int Age 
+        {
+            get 
+            {
+                int comapreResult;
+
+                DateTime today = DateTime.Now;
+                comapreResult = DateTime.Compare(today, DateOfBirth);
+
+                if(comapreResult > 0)
+                {
+                    age = today.Year - DateOfBirth.Year - 1;
+                }
+                else
+                {
+                    age = today.Year - DateOfBirth.Year;
+                }
+
+                return age;
+            }
+        }
+
+        public int DaysLeft
+        {
+            get
+            {
+                double daysLeft = -1;
+
+                DateTime nextBirthday = DateOfBirth.AddYears(age + 1);
+
+                TimeSpan timeSpan = nextBirthday - DateTime.Today;
+
+                daysLeft = timeSpan.TotalDays;
+
+                return Convert.ToInt32(daysLeft); 
+            }
+        }
 
         public Person(string name, DateTime date)
         {
             Name = name;
-            Date = date;
+            DateOfBirth = date;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }
