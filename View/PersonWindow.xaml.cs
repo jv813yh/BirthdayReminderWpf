@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * PersonWindow.cs
+ * 
+ *
+ * 
+ * Author: Jozef Vendel
+ * Version: 1.0.0
+ * Date: 10/09/2023
+ * 
+ */
+
+using BirthdayReminderWpf.ViewModel;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace BirthdayReminderWpf.View
 {
@@ -19,13 +20,36 @@ namespace BirthdayReminderWpf.View
     /// </summary>
     public partial class PersonWindow : Window
     {
-        public PersonWindow()
+        /// <summary>
+        /// 
+        /// </summary>
+        private BirthDayReminderViewModel viewModelPersonWindow;
+        public PersonWindow(BirthDayReminderViewModel viewModel)
         {
             InitializeComponent();
+            //
+            viewModelPersonWindow = viewModel;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddPerson_ClickBtn(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                viewModelPersonWindow.AddPerson(nameTextBox.Text, birthdayDatePicker.SelectedDate);
+                viewModelPersonWindow.SavePersons(viewModelPersonWindow._workWithPersons);
+                Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 

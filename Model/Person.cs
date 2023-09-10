@@ -21,6 +21,9 @@ namespace BirthdayReminderWpf.Model
 
         int age = -1;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public int Age 
         {
             get 
@@ -43,19 +46,22 @@ namespace BirthdayReminderWpf.Model
             }
         }
 
-        public int DaysLeft
+        /// <summary>
+        /// 
+        /// </summary>
+        public double DaysLeft
         {
             get
             {
                 double daysLeft = -1;
 
-                DateTime nextBirthday = DateOfBirth.AddYears(age + 1);
+                DateTime nextBirthday = DateOfBirth.AddYears(Age + 1);
 
-                TimeSpan timeSpan = nextBirthday - DateTime.Today;
+                TimeSpan timeSpan = nextBirthday - DateTime.Now;
 
                 daysLeft = timeSpan.TotalDays;
 
-                return Convert.ToInt32(daysLeft); 
+                return daysLeft;
             }
         }
 
@@ -63,6 +69,11 @@ namespace BirthdayReminderWpf.Model
         {
             Name = name;
             DateOfBirth = date;
+        }
+
+        public Person()
+        {
+
         }
 
         public override string ToString()

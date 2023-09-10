@@ -86,7 +86,8 @@
                 Height="35"
                 Margin="50,0,0,0"
                 IsDefault="True"
-                Click="AddPerson_ClickBtn"/>
+                Click="AddPerson_ClickBtn"
+                x:Name="AddPersonButton"/>
 
         <Button Content="Close window"
                 Grid.Row="3"

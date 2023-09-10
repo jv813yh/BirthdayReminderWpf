@@ -1,7 +1,7 @@
 ﻿/*
  * WorkWithPersons.cs
  * 
-
+ *
  * 
  * Author: Jozef Vendel
  * Version: 1.0.0
@@ -11,13 +11,15 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 
 namespace BirthdayReminderWpf.Model
 {
-    public class WorkWithPersons
+    public class WorkWithPersons: INotifyPropertyChanged
     {
-        public ObservableCollection<Person> Persons { get; set; }
+        public  ObservableCollection<Person> Persons { get; set; }
 
         public DateTime todayDate
         {
@@ -34,6 +36,23 @@ namespace BirthdayReminderWpf.Model
             Persons = new ObservableCollection<Person>();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="property"></param>
+        protected void WasChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         private void FindClosestPerson()
         {
             var orderedPersons = Persons.OrderBy(person => person.DaysLeft);
@@ -43,8 +62,17 @@ namespace BirthdayReminderWpf.Model
             }
             else
                 ClosestPerson = null;
+
+            WasChanged(nameof(ClosestPerson));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="dateOfBirth"></param>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         public void AddPerson(string name, DateTime? dateOfBirth)
         {
             if (name.Length < 2)
@@ -59,6 +87,10 @@ namespace BirthdayReminderWpf.Model
             FindClosestPerson();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="person"></param>
         public void RemovePerson(Person person)
         {
             Persons.Remove(person);

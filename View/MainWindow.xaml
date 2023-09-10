@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         
         Title="MainWindow" 
-        Height="500" Width="800"
+        Height="550" Width="700"
         AllowsTransparency="True" 
         Background="Transparent"
         ResizeMode="NoResize"
@@ -18,7 +18,7 @@
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Helvetica"/>
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
     </Window.Resources>
@@ -27,6 +27,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -66,68 +67,109 @@
         <StackPanel Grid.Row="1" 
             Grid.ColumnSpan="2"
             Orientation="Horizontal"
-            Margin="20,10,0,0">
-                <TextBlock Text="Today is "/>
-                <TextBlock Text=" "/>
-                <TextBlock Text=" and name day has "/>
-                <TextBlock Text=" "/>
+            Margin="20,15,0,0"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Today is "
+                       FontSize="28"
+                       Foreground="#006600"
+                       FontStyle="Italic"/>
+            <TextBlock Text="{Binding todayDate, StringFormat=dd.MM.yyyy}"
+                       FontSize="28"
+                       Foreground="#006600"
+                       FontStyle="Italic"/>
+            <TextBlock Text="  "/>
+            <TextBlock Text="{Binding todayDate.DayOfWeek}"
+                       FontSize="28"
+                       Foreground="#006600"
+                       FontStyle="Italic"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
+                    Margin="20,15,0,0">
+            <TextBlock Text="Name day has "/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
                     Grid.ColumnSpan="2"
-                    Margin="20,10,0,0">
+                    Margin="20,15,0,0">
             <TextBlock Text="Nearest birthday has "/>
-            <TextBlock Text=" "/>
+            <TextBlock Text="{Binding ClosestPerson.Name}"/>
             <TextBlock Text=" in "/>
-            <TextBlock Text=" "/>
+            <TextBlock Text="{Binding ClosesPerson.DaysLeft}"/>
             <TextBlock Text=" days"/>
         </StackPanel>
 
         <ListBox x:Name="personListBox"
-                 Grid.Row="3"
-                 Margin="25"/>
+             Width="270"
+             Grid.Row="4"
+             Margin="25"
+             Padding="10"
+             ItemsSource="{Binding Persons}"
+             BorderBrush="Black"
+             BorderThickness="3"/>
 
-  
-        <StackPanel Orientation="Horizontal"
-                        Margin="0,10,0,0"
-                        Grid.Column="1"
-                        Grid.Row="1">
-            <TextBlock Text="Date of birthday"/>
-            <TextBlock Text=" "/>
-        </StackPanel>
-        
-        <StackPanel Orientation="Horizontal"
-                        Margin="0,10,0,0"
-                        Grid.Column="1"
-                        Grid.Row="2">
-            <TextBlock Text="Age"/>
-            <TextBlock Text=" "/>
-        </StackPanel>
-        
-        <Calendar x:Name="Calendar"
+        <StackPanel Grid.Row="2"
+                    Grid.Column="2"
+                    Orientation="Vertical" 
+                    Grid.RowSpan="4"
+                    DataContext="{Binding ElementName=personListBox,Path=SelectedItem}">
+            <StackPanel Orientation="Horizontal"
+                        Margin="20,15,0,0">
+                <TextBlock Text="Birthday: "/>
+                <TextBlock Text="{Binding DateOfBirth, StringFormat=dd.MM.yyyy}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="20,15,0,0">
+                <TextBlock
+                    Text="Age: "/>
+                <TextBlock Text="{Binding Age}"/>
+            </StackPanel>
+
+            <Calendar x:Name="Calendar"
                   VerticalAlignment="Top"
-                  Margin="0,50,0,0"
-                  Grid.Column="1"
-                  Grid.Row="3"
+                  Margin="0,70,0,0"
                   Width="220" 
-                  Height="190"/>
+                  Height="190"
+                  BorderBrush="Black"
+                  BorderThickness="3"
+                  SelectedDate="{Binding DateOfBirth, Mode=OneTime}" DisplayDate="{Binding DateOfBirth, Mode=OneTime}">
+                <Calendar.CalendarDayButtonStyle>
+                    <Style TargetType="CalendarDayButton">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#FFD700"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Calendar.CalendarDayButtonStyle>
+            </Calendar>
 
+        </StackPanel>
+      
         <StackPanel Orientation="Horizontal"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.ColumnSpan="2"
-                    Grid.RowSpan="2"
                     HorizontalAlignment="Right">
             <Button Width="100" 
+                    IsDefault="True"
                     Height="40"
-                    Margin="0,220,60,0"
+                    Margin="0,230,30,0"
                     x:Name="AddButton"
-                    Content="Add a person" Click="AddPersonClickBtn"/>
+                    Content="Add a person" Click="AddPersonClickBtn"
+                    BorderBrush="Black"
+                    BorderThickness="3"/>
             <Button Width="100" 
                     Height="40"
-                    Margin="0,220,50,0"
+                    Margin="0,230,30,0"
                     x:Name="DeleteButton"
-                    Content="Remove a person"/>
+                    Content="Remove a person"
+                    Click="RemovePersonClickBtn"
+                    BorderBrush="Black"
+                    BorderThickness="3"/>
 
         </StackPanel>
 
