@@ -48,5 +48,31 @@ namespace BirthdayReminderWpf.Model
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="people"></param>
+        public void LoadPersons(WorkWithPersons withPersons)
+        {
+            //
+            XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<Person>));
+
+            //
+            if(File.Exists(pathFile))
+            {
+                //
+                using(StreamReader sr = new StreamReader(pathFile))
+                {
+                    withPersons.Persons = (ObservableCollection<Person>)serializer.Deserialize(sr);
+                }
+            }
+            else
+                withPersons.Persons = new ObservableCollection<Person>();
+
+            //
+            withPersons.FindClosestPerson();
+
+        }
+
     }
 }

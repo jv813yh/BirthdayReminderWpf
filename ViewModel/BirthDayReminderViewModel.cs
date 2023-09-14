@@ -19,13 +19,17 @@ namespace BirthdayReminderWpf.ViewModel
     {
         public WorkWithPersons _workWithPersons { get; set; }
 
-        public WorkWithFile _workWithFile { get; set; }
+        private WorkWithFile _workWithFile { get; set; }
+
+        private WorkWithCalendar _workWithCalendar { get; set; }
 
         public BirthDayReminderViewModel()
         {
             _workWithPersons = new WorkWithPersons();
 
             _workWithFile = new WorkWithFile();
+
+            _workWithCalendar = new WorkWithCalendar();
         }
 
         public void AddPerson(string name, DateTime? dateOfBirth)
@@ -41,6 +45,16 @@ namespace BirthdayReminderWpf.ViewModel
         public void SavePersons(WorkWithPersons workPersons)
         {
             _workWithFile.SavePersons(workPersons.Persons);
+        }
+
+        public void LoadPersons(WorkWithPersons workPersons)
+        {
+            _workWithFile.LoadPersons(workPersons);
+        }
+
+        public string WhoHasNameDay()
+        {
+            return _workWithCalendar.WhoHasNameDay();
         }
     }
 }

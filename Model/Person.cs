@@ -71,11 +71,13 @@ namespace BirthdayReminderWpf.Model
             DateOfBirth = date;
         }
 
+        /// <summary>
+        /// due to XmlSerializer
+        /// </summary>
         public Person()
         {
 
         }
-
         public override string ToString()
         {
             return Name;

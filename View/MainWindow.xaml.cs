@@ -4,6 +4,7 @@ using BirthdayReminderWpf.View;
 using BirthdayReminderWpf.ViewModel;
 using BirthdayReminderWpf.Model;
 using System.Linq;
+using System;
 
 namespace BirthdayReminderWpf
 {
@@ -23,8 +24,23 @@ namespace BirthdayReminderWpf
 
             viewModel = new BirthDayReminderViewModel();
 
+            try
+            {
+                //
+                viewModel.LoadPersons(viewModel._workWithPersons);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            //
             DataContext = viewModel._workWithPersons;
 
+            //
+            viewModel._workWithPersons.NameDayInfo = viewModel.WhoHasNameDay();
         }
 
         /// <summary>
@@ -66,6 +82,8 @@ namespace BirthdayReminderWpf
             if(personListBox.SelectedItem != null)
             {
                 viewModel.RemovePerson((Person)personListBox.SelectedItem);
+
+                viewModel.SavePersons(viewModel._workWithPersons);
             }
         }
     }

@@ -19,6 +19,9 @@ namespace BirthdayReminderWpf.Model
 {
     public class WorkWithPersons: INotifyPropertyChanged
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public  ObservableCollection<Person> Persons { get; set; }
 
         public DateTime todayDate
@@ -29,6 +32,14 @@ namespace BirthdayReminderWpf.Model
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string NameDayInfo { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Person ClosestPerson { get; set; }
 
         public WorkWithPersons()
@@ -53,7 +64,7 @@ namespace BirthdayReminderWpf.Model
         /// <summary>
         /// 
         /// </summary>
-        private void FindClosestPerson()
+        public void FindClosestPerson()
         {
             var orderedPersons = Persons.OrderBy(person => person.DaysLeft);
             if (orderedPersons.Any())
@@ -94,6 +105,7 @@ namespace BirthdayReminderWpf.Model
         public void RemovePerson(Person person)
         {
             Persons.Remove(person);
+
             FindClosestPerson();
         }
     }

@@ -88,6 +88,8 @@
                     Orientation="Horizontal"
                     Margin="20,15,0,0">
             <TextBlock Text="Name day has "/>
+            <TextBlock Text="{Binding NameDayInfo}"
+                       Foreground="Red"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3"
@@ -95,17 +97,15 @@
                     Grid.ColumnSpan="2"
                     Margin="20,15,0,0">
             <TextBlock Text="Nearest birthday has "/>
-            <TextBlock Text="{Binding ClosestPerson.Name}"/>
-            <TextBlock Text=" in "/>
-            <TextBlock Text="{Binding ClosesPerson.DaysLeft}"/>
-            <TextBlock Text=" days"/>
+            <TextBlock Text="{Binding ClosestPerson.Name}"
+                       Foreground="Red"/>
         </StackPanel>
 
         <ListBox x:Name="personListBox"
              Width="270"
              Grid.Row="4"
              Margin="25"
-             Padding="10"
+             Padding="25"
              ItemsSource="{Binding Persons}"
              BorderBrush="Black"
              BorderThickness="3"/>
@@ -117,15 +117,18 @@
                     DataContext="{Binding ElementName=personListBox,Path=SelectedItem}">
             <StackPanel Orientation="Horizontal"
                         Margin="20,15,0,0">
-                <TextBlock Text="Birthday: "/>
+                <TextBlock Text="Birthday: "
+                           Foreground="Red"/>
                 <TextBlock Text="{Binding DateOfBirth, StringFormat=dd.MM.yyyy}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
                         Margin="20,15,0,0">
-                <TextBlock
-                    Text="Age: "/>
-                <TextBlock Text="{Binding Age}"/>
+                <TextBlock Margin="0,10,0,0"
+                    Text="Age: " 
+                    Foreground="Red"/>
+                <TextBlock Text="{Binding Age}"
+                           Margin="0,10,0,0"/>
             </StackPanel>
 
             <Calendar x:Name="Calendar"
